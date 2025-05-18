@@ -172,3 +172,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+.idea/
+!.idea/codeStyles
+!.idea/codeStyles/*
+!.idea/modules.xml
+.idea/vcs.xml
+
+

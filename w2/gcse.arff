@@ -1,0 +1,135 @@
+@relation gcse
+
+
+@attribute firstname STRING
+@attribute lastname STRING
+@attribute gender STRING %male or female
+@attribute dob STRING %date of birth, in ISO format
+@attribute auth STRING
+@attribute subject1 STRING %Relevant exam board's version of subject name
+@attribute grade1 STRING %Letter grade result
+@attribute subject2 STRING
+@attribute grade2 STRING
+@attribute subject3 STRING
+@attribute grade3 STRING
+@attribute subject4 STRING
+@attribute grade4 STRING
+@attribute subject5 STRING
+@attribute grade5 STRING
+
+@data
+CHARLOTTE, Wright, f, 1977/3/6, Bath/Avon, 'English Literature', A, Maths, U, 'English Language', N, Geography, U, History, 1
+LEIGH, Roberts, mf, 1977/5/31, Herts, 'English Language', E, 'Double Science', B, 'English Literature', C, Geography, E, Maths, B
+MICHAEL, Clark, m, 1977/4/4, Wolverhampton, 'English Literature', U, Maths, F, 'Double Science', C, Geology, G, History, A*
+LUKE, White, m, 1978/11/25, Bath/Avon, Maths, D, 'English Language', A*, 'Double Science', G, Geography, C, 'English Literature', E
+TAYLOR, Clark, m, 1979/8/13, Bath/Avon, Maths, A, History, , 'English Literature', F, 'English Language', C, 'Double Science', 4
+JADE, Green, mf, 1977/Jul/20, Wolverhampton, 'English Literature', F, 'English Literature', A*, Maths, E, History, B, 'Double Science', B
+ALEXANDRA, Roberts, f, 1979/5/6, Bath/Avon, 'English Language', K, 'English Literature', G, Geology, A*, 'English Literature', U, Maths, B
+MORGAN, Wilson, m, 1979/12/29, Herts, 'English Language', E, 'Double Science', B, , U, Geography, E, Maths, A
+JORDAN, Jackson, f, 1978/7/17, Wolverhampton, 'English Literature', A*, 'English Literature', G, 'Double Science', G, Maths, K, 'English Language', U
+KELLY, Green, m, 1977/6/13, Wolverhampton, Geography, U, 'English Literature', D, Maths, A*, 'Double Science', G, History, F
+THOMAS, Smith, m, 1978/5/13, Herts, , F, 'English Language', D, 'Double Science', A*, 'Double Science', G, Geology, F
+LUKE, Green, m, 1977/10/2, Wolverhampton, 'English Literature', U, 'English Language', B, Geography, G, Maths, E, 'Double Science', G
+VICTORIA, Evans, f, 1979/2/14, Herts, , F, History, U, 'English Literature', A, 'Double Science', U, Geography, U
+BENJAMIN, Clark, m, 1978/3/18, Herts, Geography, A, 'Double Science', D, , E, 'English Language', B, Maths, F
+CHARLES, Taylor, m, 1978/6/2, Wolverhampton, , A*, 'Double Science', G, 'English Literature', C, Maths, A, History, 
+KELLY, Clark, m, 1978/8/24, Herts, 'English Language', A*, Maths, C, Geology, A*, 'Double Science', A, 'English Literature', U
+SHANNON, Clark, f, 1979/4/25, Herts, History, A+, Maths, D, 'Double Science', U, 'English Language', F, 'English Literature', A
+MARK, Wood, m, 1978/3/23, Wolverhampton, History, F, 'Double Science', F, Maths, B, 'English Literature', A, Geography, U
+GEORGINA, Williams, f, 1978/9/19, Bath/Avon, Maths, D, 'Double Science', B, 'English Literature', A*, 'English Language', G, History, U
+BENJAMIN, Williams, m, 1978/1/31, Herts, 'English Language', U, Geography, U, Maths, D, 'Double Science', A*, 'English Literature', D
+LUKE, Wright, m, 1979/4/9, Herts, History, A, 'English Language', A*, 'English Literature', D, Geography, U, 'Double Science', F
+BETHANY, Wilson, f, 1978/1/6, Wolverhampton, 'Double Science', D, 'English Language', E, Maths, 4, History, B, 'English Literature', K
+LEWIS, , m, 1977/3/13, Bath/Avon, Geology, F, , U, 'English Literature', C, Maths, D, 'English Language', C
+JORDAN, Green, m, 1978/11/4, Wolverhampton, History, E, 'English Language', G, Geography, D, 'English Literature', D, Maths, 1
+GEORGIA, Smith, f, 1977/5/26, Bath/Avon, 'Double Science', C, 'English Literature', U, History, , Maths, U, Geography, A
+NATHAN, Clark, m, 1979/7/10, Herts, Geography, G, 'Double Science', A, History, D, 'English Language', G, Maths, A
+DAVID, Davies, m, 1977/5/1, Bath/Avon, 'English Language', E, , E, History, D, Geography, D, 'Double Science', E
+CHARLOTTE, Clark, f, 1978/8/31, Herts, History, D, 'English Language', U, Maths, G, Geography, A*, 'English Literature', B
+DANIEL, Jones, m, 1978/2/14, Wolverhampton, 'English Language', D, Geography, B, Maths, A*, 'English Literature', A*, 'Double Science', C
+, Wood, f, 1979/2/4, Herts, Maths, F, 'Double Science', A, 'English Literature', D, History, C, Geography, F
+CHARLES, White, m, 1977/11/13, Herts, 'Double Science', E, Maths, D, Geography, G, 'English Language', B, History, A*
+, Wright, f, 1978/1/25, Wolverhampton, History, B, Geography, F, 'English Literature', C, 'Double Science', D, Geology, A
+AMY, Jackson, f, 1977/3/3, Herts, Geology, F, 'Double Science', D, 'English Language', U, History, E, 'English Literature', A*
+HOLLY, Thompson, f, 1979/11/9, Wolverhampton, History, F, 'English Literature', U, Geography, A*, 'Double Science', U, Maths, D
+MELISSA, Green, x, 1978/4/9, Herts, 'English Literature', F, 'Double Science', F, History, D, Maths, D, Geography, F
+MORGAN, Roberts, m, 1978/9/17, Bath/Avon, 'Double Science', U, 'English Literature', A+, History, F, 'English Language', 7, Geography, D
+RYAN, Jackson, m, 1977/11/15, Herts, Geography, G, 'English Literature', B, 'Double Science', E, 'English Language', G, Maths, K
+AMY, White, x, 1977/11/2, Herts, Geography, A*, 'English Language', U, Maths, C, 'Double Science', B, History, D
+GEORGIA, Evans, f, 1978/6/5, Bath/Avon, 'Double Science', A*, , U, Maths, F, 'English Literature', A+, 'English Literature', G
+ALEXIS, Smith, f, 1978/7/29, Herts, Geography, N, Maths, F, 'Double Science', E, 'English Language', F, History, B
+ELEANOR, Wilson, f, 1985/5/15, Herts, Maths, E, 'Double Science', A, History, F, Geography, A*, 'English Literature', A
+BRADLEY, Roberts, m, 1979/5/20, Bath/Avon, 'English Literature', D, 'English Language', K, Maths, C, Geology, U, Geography, C
+LOUISE, Taylor, f, 1973/7/29, Wolverhampton, Geography, A, History, E, 'English Language', A*, 'English Literature', G, Maths, A*
+GEMMA, Thompson, mf, 1979/7/23, Bath/Avon, Geology, U, 'Double Science', G, , A, 'English Literature', F, Geography, U
+JAMIE, Walker, m, 1978/4/8, Wolverhampton, 'English Literature', A*, Maths, D, History, C, 'English Language', A*, Geography, D
+JORDAN, Clark, m, 1977/10/12, Herts, 'English Literature', A+, 'Double Science', C, 'English Language', F, Maths, B, Geography, B
+REBECCA, Brown, f, 1978/7/11, Wolverhampton, Maths, C, 'English Language', E, 'English Literature', , History, U, 'Double Science', B
+ALEXIS, Brown, m, 1978/9/16, Bath/Avon, 'English Literature', C, Maths, G, 'Double Science', A*, 'English Language', U, History, F
+SARAH, Thompson, f, 1979/12/17, Wolverhampton, 'English Language', D, Geology, E, 'Double Science', G, Maths, B, History, C
+RYAN, White, m, 1978/2/10, Wolverhampton, 'English Literature', F, 'English Literature', D, 'English Literature', E, 'English Literature', C, History, U
+NATALIE, Brown, f, 1978/12/8, Herts, 'English Literature', C, 'Double Science', G, Maths, A*, History, U, Geology, F
+, Walker, m, 1977/6/30, Bath/Avon, 'Double Science', A*, Maths, G, Geography, E, History, D, Geology, B
+SCOTT, , m, 1978/10/23, Bath/Avon, Maths, G, 'English Language', D, 'Double Science', F, Geography, B, Geography, B
+JACOB, Wilson, m, 1979/2/22, Bath/Avon, 'English Language', E, Maths, E, 'English Literature', B, 'Double Science', K, History, D
+DANIELLE, Wright, f, 1979/7/26, Bath/Avon, 'English Language', G, 'Double Science', C, History, C, , U, Maths, C
+MICHAEL, Hall, m, 1979/7/26, Wolverhampton, 'Double Science', B, History, C, 'English Literature', G, Geography, B, Maths, E
+JORDAN, Williams, m, 1977/1/20, Bath/Avon, Geography, U, History, B, History, , 'English Language', U, 'English Language', A*
+JORDAN, Johnson, m, 1978/9/2, Bath/Avon, , , 'English Literature', G, History, A, Maths, 7, Geography, F
+HAYLEY, Davies, f, 1978/8/5, Bath/Avon, 'English Language', C, Maths, A*, 'English Literature', C, History, A, 'Double Science', E
+REBECCA, White, f, 1977/5/3, Bath/Avon, Maths, U, 'Double Science', D, 'English Language', B, History, U, Geography, G
+, Walker, f, 20/1/1978, Wolverhampton, Maths, F, 'English Language', D, History, B, 'Double Science', G, Geography, A*
+BEN, Johnson, m, 1978/9/2, Bath/Avon, History, A*, Geography, B, 'Double Science', E, 'English Literature', D, Maths, E
+EMILY, Johnson, f, 1978/9/1, Herts, Geography, A*, Maths, D, History, D, 'Double Science', B, 'English Language', A
+JESSICA, Jackson, f, 1979/11/3, Herts, Maths, U, 'English Language', A, History, A*, 'Double Science', G, Geography, E
+HANNAH, Wilson, f, 1977/3/29, Herts, 'Double Science', E, Geography, E, 'English Language', U, Maths, D, History, D
+LEIGH, Wright, f, 1977/4/7, Bath/Avon, 'English Literature', A*, 'Double Science', F, , A*, Maths, A, Geography, K
+JAMIE, Wright, m, 1979/6/30, Wolverhampton, 'English Language', A*, Maths, D, Geography, A, 'Double Science', N, History, D
+STEPHANIE, Clark, f, 1979/7/19, Wolverhampton, Geography, E, Maths, B, , B, 'Double Science', G, History, E
+JORDAN, Johnson, m, 1978/7/2, Bath/Avon, 'English Literature', F, 'Double Science', A*, History, A*, Geography, F, Maths, C
+ALEXANDER, Taylor, m, 1978/9/16, Wolverhampton, 'English Language', U, History, F, History, C, Geography, A*, 'Double Science', U
+JACOB, Jones, m, 1978/1/6, Herts, 'English Language', F, History, F, 'English Literature', E, 'Double Science', A, Maths, F
+BETHANY, Jackson, f, 1979/Oct/28, Herts, 'English Language', C, Geography, E, 'English Literature', F, History, C, Maths, D
+AMY, Roberts, f, 1978/2/6, Bath/Avon, 'English Literature', D, 'English Language', B, Geography, U, Maths, F, 'Double Science', N
+AARON, Jones, m, 3/4/1978, Wolverhampton, History, F, 'English Language', C, Geography, U, 'Double Science', U, 'Double Science', F
+SHANNON, Taylor, x, 1978/6/3, Wolverhampton, History, U, 'English Literature', E, Maths, A, Maths, A, Geography, B
+AMY, Jones, f, 1979/7/1, Wolverhampton, History, C, 'English Literature', C, Maths, G, 'Double Science', A, 'English Language', A
+MARK, Wright, m, 1978/9/4, Bath/Avon, Maths, E, 'Double Science', G, 'English Literature', D, 'English Language', F, History, G
+DANIEL, Walker, m, 1978/1/1, Herts, Geography, A, 'English Literature', E, History, F, , F, 'Double Science', K
+, White, m, 1978/7/23, Herts, History, E, Geography, C, Maths, G, 'English Language', D, , A*
+HOLLY, Davies, f, 1977/3/20, Wolverhampton, 'English Literature', 6, 'English Language', C, 'Double Science', F, , A*, Maths, A*
+DAVID, Taylor, m, 1978/5/17, Wolverhampton, , G, History, A, 'Double Science', E, Geography, G, 'English Language', B
+, Smith, m, 1978/2/27, Herts, , B, Geography, B, Maths, F, History, E, 'Double Science', D
+JAMES, Davies, m, 1977/9/21, Wolverhampton, Geography, A*, 'English Literature', A, Maths, C, 'English Language', G, History, F
+KIERAN, Wood, m, 1979/10/28, Herts, 'English Language', C, 'Double Science', D, Maths, C, Geography, A+, History, N
+VICTORIA, Clark, f, 1979/12/24, Bath/Avon, 'English Literature', N, History, E, 'English Language', 5, Maths, A, 'Double Science', B
+ASHLEY, Johnson, m, 1978/2/20, Wolverhampton, History, D, Geography, E, Maths, B, 'English Language', , 'Double Science', D
+JAKE, Clark, m, 20/5/1979, Bath/Avon, Maths, C, 'English Literature', E, History, C, Geology, B, Geography, A
+ZOE, Taylor, f, 4/9/1978, Herts, Geography, U, History, F, 'English Language', D, 'English Literature', B, 'Double Science', C
+ELEANOR, Hall, f, 1979/12/12, Herts, Maths, C, 'Double Science', E, 'English Literature', D, Geography, U, 'English Language', N
+CHARLOTTE, Wood, f, 1977/12/24, Bath/Avon, 'English Literature', C, Maths, A*, Geography, E, 'English Language', C, History, D
+BRADLEY, Robinson, m, 1978/1/18, Herts, History, E, 'English Language', D, 'English Literature', G, 'Double Science', U, Geography, A
+LUCY, Evans, f, 1978/2/29, Bath/Avon, History, E, Geography, G, Maths, B, , C, 'Double Science', C
+JOSHUA, Thompson, m, 1978/8/10, Wolverhampton, 'Double Science', A, Geography, U, Geology, E, Maths, A, 'English Literature', A
+NATHAN, Smith, m, 1979/5/16, Wolverhampton, Geography, N, 'Double Science', E, 'English Language', B, History, U, Maths, G
+TAYLOR, Williams, m, 1979/7/4, Herts, 'English Literature', C, History, G, Geography, E, Maths, C, 'Double Science', G
+SAM, Clark, m, 1979/11/7, Herts, 'Double Science', F, 'English Language', A*, History, D, Geography, B, 'English Literature', D
+ALEXIS, Brown, m, 1978/10/12, Bath/Avon, Geography, F, 'English Language', G, 'Double Science', C, 'English Literature', 0, Geology, E
+ALEXIS, White, f, 1979/10/18, Herts, 'Double Science', C, 'English Language', A, 'English Literature', D, History, U, Maths, F
+ZOE, Johnson, f, 1977/11/31, Herts, Geology, B, 'English Language', F, Maths, C, History, G, 'English Literature', D
+JORDAN, Wood, f, 1979/6/28, Wolverhampton, Geography, A*, 'English Literature', A+, 'Double Science', F, Maths, A*, 'English Language', C
+SAM, Johnson, m, 1979/4/20, Wolverhampton, 'Double Science', D, Maths, E, History, D, 'English Language', A+, Geography, G
+ELEANOR, Hall, mf, 1977/8/12, Herts, History, A, 'English Literature', A, 'Double Science', F, Maths, C, Geography, E
+, Wilson, f, 1979/6/21, Herts, 'English Literature', E, Maths, K, Maths, A*, 'English Language', A, Geography, D
+ROBERT, Smith, m, 1977/9/1, Herts, 'Double Science', D, Maths, C, History, A, 'English Literature', A*, 'English Language', U
+TAYLOR, Wood, m, 1978/12/12, Wolverhampton, 'English Literature', A*, 'Double Science', F, 'English Language', F, Geography, C, Maths, U
+JORDAN, Wright, f, 1978/1/12, Wolverhampton, Geography, A*, 'English Literature', N, Maths, C, 'English Language', A, 'Double Science', G
+CHRISTOPHER, Wright, m, 1977/11/27, Herts, 'English Literature', A, History, D, Geology, A, Maths, A, 'English Language', D
+KIRSTY, Jackson, f, 1979/10/19, Wolverhampton, Geography, D, History, F, 'English Language', A, 'English Language', D, 'English Literature', G
+ANDREW, Wood, m, 1979/6/23, Herts, 'Double Science', G, 'English Literature', C, 'English Language', B, , U, Maths, C
+THOMAS, Evans, m, 1977/11/21, Wolverhampton, Geography, G, 'English Language', C, 'Double Science', B, Geology, A*, History, C
+ALEXANDER, Davies, m, 1978/11/20, Wolverhampton, Geology, E, Maths, C, 'English Literature', D, 'English Language', C, 'Double Science', C
+CHRISTOPHER, Wood, m, 1979/10/8, Wolverhampton, 'English Language', D, History, K, Geography, C, 'English Literature', D, Maths, F
+SAMUEL, Jones, m, 1979/11/6, Herts, 'English Literature', B, 'English Language', D, Geography, F, History, C, 'Double Science', G
+SAMUEL, , m, 1977/2/29, Bath/Avon, Maths, A*, Maths, C, 'Double Science', D, 'English Literature', B, , D
+NATASHA, Walker, , 1979/5/7, Herts, 'Double Science', A, 'English Literature', F, History, E, Maths, A*, Geography, F
