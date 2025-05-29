@@ -1,115 +1,83 @@
-import pandas as pd
-import numpy as np
-
-from sklearn.svm import SVR
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import cross_val_score
-
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-# implement additional functions
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-def root_relative_squared_error(y_true, y_pred):
-    numerator = np.sum((y_true - y_pred) ** 2)
-    denominator = np.sum((y_true - np.mean(y_true)) ** 2)
-    return np.sqrt(numerator / denominator)
+# load the dataset
+data = load_iris()
+# the data containing the features used the classification is in the field 'data'
+# the training and testing sets are the same as we use the full data set for training
+X_train = X_test = data.data
+# the data containing the classified instances is in the field target
+# again, the training and testing sets are the same as we use the full data set for training
+y_train = y_test= data.target
 
-def relative_absolute_error(y_true, y_pred):
-    numerator = np.sum(np.abs(y_true - y_pred))
-    denominator = np.sum(np.abs(y_true - np.mean(y_true)))
-    return numerator / denominator
+# train a Decision Tree
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+# make predictions and evaluate
+y_pred = clf.predict(X_test)
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("\nClassification Report for Full training set:\n",
+      classification_report(y_test, y_pred, target_names=data.target_names))
 
-# prepare the data
-# load data
-possum_data=pd.read_csv('../w3/possum.csv', delimiter=',', encoding='utf-8')
-possum_encoded = pd.get_dummies(possum_data)
-# the list of features used by the model
-features_data = possum_encoded[['site', 'age', 'headL', 'skullW ', 'totalL',
-'sex_m', 'sex_f']]
-# the target (output) of the analysis
-target_data = possum_encoded['tailL']
+# naive bayes model
+modelNB = GaussianNB()
+modelNB.fit(X_train, y_train)
+# predict on the test set
+y_pred = modelNB.predict(X_test)
+# evaluation
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("Classification Report for Naive Bayes Model:\n",
+classification_report(y_test, y_pred, target_names=data.target_names))
 
-# create SVR and linear regression models
-X_train, X_test, y_train, y_test = features_data, features_data, target_data, target_data
-
-# create and train linear regression model
-lr_model = LinearRegression()
-lr_model.fit(X_train, y_train)
-
-# standardising features (important for SVR)
+#  SVM model
+# feature scaling (recommended for SVM)
 feature_scaler = StandardScaler()
 X_train_scaled = feature_scaler.fit_transform(X_train)
+# create and train an SVM classifier using SMO (implicitly)
+model = SVC(kernel='linear') # or 'rbf', 'poly' depending on your preference
+model.fit(X_train_scaled, y_train)
+# predict on the test set, which needs to be scaled using the transform method
+y_pred = model.predict(feature_scaler.transform(X_test))
+# Evaluation
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("Classification Report:\n",
+      classification_report(y_test, y_pred, target_names=data.target_names))
 
-# standardising target (important for SVR)
-target_scaler = StandardScaler()
-y_train_scaled = target_scaler.fit_transform(
-y_train.values.reshape(len(y_train),1))
+# Split into training and test sets
+for test_size in [0.2, 0.3, 0.4, 0.5]:
+    X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=test_size, random_state=0)
+    # train a Decision Tree
+    clf = DecisionTreeClassifier()
+    clf.fit(X_train, y_train)
+    # make predictions and evaluate
+    y_pred = clf.predict(X_test)
+    # print("Accuracy:", accuracy_score(y_test, y_pred))
+    print(f'\n\n################################# Report for test size of {round(test_size*100)}% ###############################\n')
+    print("\nClassification Report Decision Tree Model:\n",
+          classification_report(y_test, y_pred, target_names=data.target_names))
 
-# create and train the SMOreg equivalent model
-svr_model = SVR(kernel='rbf', C=1.0, epsilon=0.1)
-svr_model.fit(X_train_scaled, np.reshape(y_train_scaled, len(y_train_scaled)))
-
-# predict for Linear Regression Model
-lr_pred = lr_model.predict(X_test)
-
-# predict for SVR Model
-svr_pred = svr_model.predict(feature_scaler.transform(X_test))
-
-# reverse scaling to evaluate model
-svr_pred = target_scaler.inverse_transform(svr_pred.reshape(-1, 1)).flatten()
-
-# evaluate
-print('---------------- LR Model -----------------------------')
-print("RRSE:", root_relative_squared_error(y_test, lr_pred))
-print("RAE:", relative_absolute_error(y_test, lr_pred))
-print("RMSE:", np.sqrt(mean_squared_error(y_test, lr_pred)))
-print("R² score:", r2_score(y_test, lr_pred))
-print('MSA:', mean_absolute_error(y_test, lr_pred))
-print('---------------- SVR Model -----------------------------')
-print("RRSE:", root_relative_squared_error(y_test, svr_pred))
-print("RAE:", relative_absolute_error(y_test, svr_pred))
-print("RMSE:", np.sqrt(mean_squared_error(y_test, svr_pred)))
-print("R² score:", r2_score(y_test, svr_pred))
-print('MSA:', mean_absolute_error(y_test, svr_pred))
-
-# evaluating using percentage split
-split_sizes = [0.2, 0.3, 0.4, 0.5]
-for size in split_sizes:
-    print(f'######### Percentage Split: {round(size*100)}% #########')
-    # splitting the dataset into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(features_data, target_data,
-    test_size=size, random_state=19)
-    # Create and train the Linear Regression model
-    lr_model = LinearRegression()
-    lr_model.fit(X_train, y_train)
-    # Predict for Linear Regression Model
-    lr_pred = lr_model.predict(X_test)
-    print('---------------- LR Model -----------------------------')
-    print("RRSE:", root_relative_squared_error(y_test, lr_pred))
-    print("RAE:", relative_absolute_error(y_test, lr_pred))
-    print("RMSE:", np.sqrt(mean_squared_error(y_test, lr_pred)))
-    print("R² score:", r2_score(y_test, lr_pred))
-    print('MSA:', mean_absolute_error(y_test, lr_pred))
-    # Standardising features for SVR
+    modelNB = GaussianNB()
+    modelNB.fit(X_train, y_train)
+    # predict on the test set
+    y_pred = modelNB.predict(X_test)
+    # evaluation
+    print(' --------------------------------------- ')
+    print("Classification Report for Naive Bayes Model:\n",
+    classification_report(y_test, y_pred, target_names=data.target_names))
+    # feature scaling (recommended for SVM)
     feature_scaler = StandardScaler()
     X_train_scaled = feature_scaler.fit_transform(X_train)
-    # Standardising target SVR
-    target_scaler = StandardScaler()
-    y_train_scaled = target_scaler.fit_transform(
-    y_train.values.reshape(len(y_train),1))
-    # Create and train the SMOreg equivalent model
-    svr_model = SVR(kernel='rbf', C=1.0, epsilon=0.1)
-    svr_model.fit(X_train_scaled, np.reshape(y_train_scaled, len(y_train_scaled)))
-    # Predict for SVR Model
-    svr_pred = svr_model.predict(feature_scaler.transform(X_test))
-    # Inverse the transform on the predicted value so it can be compared to the
-    # real data.
-    svr_pred = target_scaler.inverse_transform(svr_pred.reshape(-1, 1)).flatten()
-    print('---------------- SVR Model -----------------------------')
-    print("RRSE:", root_relative_squared_error(y_test, svr_pred))
-    print("RAE:", relative_absolute_error(y_test, svr_pred))
-    print("RMSE:", np.sqrt(mean_squared_error(y_test, svr_pred)))
-    print("R² score:", r2_score(y_test, svr_pred))
-    print('MSA:', mean_absolute_error(y_test, svr_pred))
+    # create and train an SVM classifier using SMO (implicitly)
+    model = SVC(kernel='linear') # or 'rbf', 'poly' depending on your preference
+    model.fit(X_train_scaled, y_train)
+    # predict on the test set, which needs to be scaled using the transform method
+    y_pred = model.predict(feature_scaler.transform(X_test))
+    # evaluation
+    print(' ------------------------------------- ')
+    print("Classification Report for SVM Model:\n",
+          classification_report(y_test, y_pred, target_names=data.target_names))
