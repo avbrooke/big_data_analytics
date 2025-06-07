@@ -82,7 +82,7 @@ sns.boxplot(data=filtered_data, x='Renovation', y='Price_USD')
 plt.title('Price Distribution by Renovation Type (USD)')
 plt.xticks(rotation=45)
 plt.ylabel('Price (USD)')
-plt.show()
+# plt.show()
 
 # STATISTICAL TEST: Kruskal-Wallis H-Test for Renovation
 categories = train_clean['Renovation'].unique()
@@ -92,6 +92,54 @@ kruskal_result = kruskal(*groups)
 print(f"\nKruskal-Wallis test for Renovation vs Price_USD: H = {kruskal_result.statistic:.4f}, p = {kruskal_result.pvalue:.4e}")
 
 if kruskal_result.pvalue < 0.05:
-    print("✅ Significant difference between Renovation type and Price (reject H0).")
+    print("Significant difference between Renovation type and Price (reject H0).")
 else:
-    print("❌ No significant difference between Renovation type and Price (fail to reject H0).")
+    print("No significant difference between Renovation type and Price (fail to reject H0).")
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.stats import spearmanr
+
+# --- Step 1: Map Duration to Numeric Values ---
+# Map rental durations to approximate days
+duration_mapping = {
+    'daily': 1,
+    'weekly': 7,
+    'monthly': 30,
+    'yearly': 365
+}
+
+# First, lower the duration column and map
+train_clean['Duration_numeric'] = train_clean['Duration'].str.lower().map(duration_mapping)
+
+# Check if any are still NaN (for unexpected categories)
+print(train_clean['Duration_numeric'].isnull().sum())
+
+# Optional: Drop rows where Duration couldn't be mapped
+train_clean = train_clean.dropna(subset=['Duration_numeric'])
+
+# --- Step 2: Prepare Data for Correlation ---
+correlation_data = train_clean[['Number_of_rooms', 'Price_USD', 'Duration_numeric']]
+
+# --- Step 3: Spearman Correlation Matrix ---
+correlation_matrix = correlation_data.corr(method='spearman')
+print("\nSpearman Correlation Matrix:")
+print(correlation_matrix)
+
+# --- Step 4: Visualize Correlation Matrix ---
+plt.figure(figsize=(8, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Spearman Correlation Matrix: Number_of_rooms, Price, Duration')
+plt.show()
+
+# --- Step 5: Additional - Spearman's Rho and p-values (optional, more detailed) ---
+# Example for two specific variables
+rho, pval = spearmanr(train_clean['Number_of_rooms'], train_clean['Price_USD'])
+print(f"\nSpearman correlation between Number_of_rooms and Price_USD: rho = {rho:.4f}, p = {pval:.4e}")
+
+rho, pval = spearmanr(train_clean['Number_of_rooms'], train_clean['Duration_numeric'])
+print(f"Spearman correlation between Number_of_rooms and Duration: rho = {rho:.4f}, p = {pval:.4e}")
+
+rho, pval = spearmanr(train_clean['Price_USD'], train_clean['Duration_numeric'])
+print(f"Spearman correlation between Price_USD and Duration: rho = {rho:.4f}, p = {pval:.4e}")
